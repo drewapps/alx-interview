@@ -1,33 +1,26 @@
 #!/usr/bin/python3
-'''LockBoxes Challenge'''
+"""
+You have n number of locked boxes in front of you.
+Each box is numbered sequentially from 0 to n - 1
+and each box may contain keys to the other boxes.
+boxes is a list of lists
+A key with the same number as a box opens that box
+You can assume all keys will be positive integers
+The first box boxes[0] is unlocked
+Return True if all boxes can be opened, else return False
+"""
 
 
 def canUnlockAll(boxes):
-    '''determines if all the boxes can be opened or not
-    Returns:
-        True: all boxes can be opened
-        False: not all boxes can be opened
-    '''
-    length = len(boxes)
-    keys = set()
-    opened_boxes = []
-    i = 0
-
-    while i < length:
-        oldi = i
-        opened_boxes.append(i)
-        keys.update(boxes[i])
-        for key in keys:
-            if key != 0 and key < length and key not in opened_boxes:
-                i = key
-                break
-        if oldi != i:
-            continue
-        else:
-            break
-
-    for i in range(length):
-        if i not in opened_boxes and i != 0:
-            return False
-    return True
+    """ method that determines if all the boxes can be opened. """
+    n = len(boxes)
+    myList = [0]
+    for i in myList:
+        for j in boxes[i]:
+            if j not in myList:
+                if j < n:
+                    myList.append(j)
+    if len(myList) == n:
+        return True
+    return False
     
